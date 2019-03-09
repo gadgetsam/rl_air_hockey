@@ -5,8 +5,12 @@
 #ifndef SIMULATION_WALL_CLASS_H
 #define SIMULATION_WALL_CLASS_H
 
+#include "Line_Class.h"
 
-class Wall_Class {
+class Wall_Class : public Line_Class{
+    Wall_Class(vector<double> start_input, vector<double> end_input, int line_direction_input) :
+        Line_Class(start_input, end_input, line_direction_input){};
+
 
 };
 

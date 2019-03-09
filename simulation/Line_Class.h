@@ -20,6 +20,9 @@ public:
         end = end_input;
         line_direction = line_direction_input;
     };
+    vector<double> get_start(){return start;};
+    vector<double> get_end(){return end;};
+    int get_line_direction(){return line_direction;};
 };
 
 

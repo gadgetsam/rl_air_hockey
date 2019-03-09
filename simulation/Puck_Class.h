@@ -18,11 +18,11 @@ private:
     double friction;
     double update_time;
 public:
-    Puck_Class(double puck_mass_input, double friction_input, double update_time_input);
+    Puck_Class(double mass_input, double radius_input, double update_time_input, vector<double> position_input, double friction_input);
 
     void change_momentum_line(Line_Class* line);
 
-    void change_momentum_circle(Striker_Class* circle);
+    void change_momentum_circle(Circle_Class* circle);
     void propose_new_position( double update_time);
 
 };

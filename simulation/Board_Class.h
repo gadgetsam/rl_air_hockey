@@ -13,6 +13,7 @@
 #include "Wall_Class.h"
 #include "passing_structures.h"
 
+
 class Board_Class {
 private:
     Goal_Class goals[2];
