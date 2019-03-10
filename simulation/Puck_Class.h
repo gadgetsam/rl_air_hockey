@@ -19,7 +19,7 @@ private:
     double update_time;
 public:
     Puck_Class(double mass_input, double radius_input, double update_time_input, vector<double> position_input, double friction_input);
-
+    Puck_Class();
     void change_momentum_line(Line_Class* line);
 
     void change_momentum_circle(Circle_Class* circle);

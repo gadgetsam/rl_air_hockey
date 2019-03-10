@@ -12,6 +12,7 @@
 #include "Striker_Class.h"
 #include "Wall_Class.h"
 #include "passing_structures.h"
+#include "Circle_Class.h"
 
 
 class Board_Class {

@@ -15,6 +15,9 @@ public:
     Line_Class(start_input, end_input, line_direction_input){
         goal_ID = goal_ID_input;
     };
+    Goal_Class() : Line_Class(){
+        goal_ID = 0;
+    }
     int get_goal_ID(){
         return goal_ID;
     };
