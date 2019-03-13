@@ -7,6 +7,10 @@
 
 #include "Line_Class.h"
 #include "passing_structures.h"
+struct line_collision_return{
+    bool collision;
+    vector<double> closest_point;
+};
 class Circle_Class {
 protected:
     vector<double> velocity;
@@ -27,10 +31,17 @@ public:
     Circle_Class(double mass_input, double radius_input, double update_time_input, vector<double> position_input,
             vector<double> max_position_input);
     Circle_Class();
-    bool line_collision(Line_Class* line);
+    line_collision_return line_collision(Line_Class* line);
     bool circle_collision(Circle_Class* circle);
     vector<double> check_position_inbounds();
+    vector<double> element_wise_multiplication(vector<double> v1, vector<double> v2);
+    double sum(vector<double> v1);
+    double dot(vector<double> v1, vector<double> v2);
 
+    vector<double> scalar_multiply(vector<double> v1, double scalar);
+    vector<double> add(vector<double> v1, vector<double> v2);
+    vector<double> subtract(vector<double> v1, vector<double> v2);
+    double pythagorian(vector<double> v1, vector<double> v2);
 };
 
 

@@ -14,7 +14,6 @@
 #include "passing_structures.h"
 #include "Circle_Class.h"
 
-
 class Board_Class {
 private:
     Goal_Class goals[2];

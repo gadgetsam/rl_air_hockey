@@ -4,7 +4,7 @@
 
 #include "Circle_Class.h"
 #include <math.h>
-#include "helpful_functions.cpp"
+
 Circle_Class::Circle_Class(double mass_input, double radius_input, double update_time_input,
                            vector<double> position_input,vector<double> max_position_input) {
     mass= mass_input;
@@ -34,19 +34,26 @@ bool Circle_Class::circle_collision(Circle_Class* circle) {
     return false;
 
 }
-//TODO change to also return closest point
-bool Circle_Class::line_collision(Line_Class *line) {
+line_collision_return Circle_Class::line_collision(Line_Class *line) {
     vector<double> line_start = line->get_start();
     vector<double> line_end = line->get_end();
     double len = pythagorian(line_start, line_end);
     double projection = dot(subtract(position_proposed, line_start),
                                                      subtract(line_end, line_start))/pow(len,2);
     vector<double> closest_point = add(line_start, scalar_multiply(subtract(line_end,line_start), projection));
+
     double distance = pythagorian(closest_point, position_proposed);
+    //    line_collision_return temp;
     if(distance >= radius){
-        return false;
+        vector<double> test = {0,0};
+
+//        temp.collision = false;
+//        temp.closest_point = test;
+        return {false, test};
     }
-    return true;
+//    temp.collision= true;
+//    temp.closest_point = closest_point;
+    return {true, closest_point};
 }
 
 vector<double> Circle_Class::check_position_inbounds() {
@@ -64,4 +71,52 @@ vector<double> Circle_Class::check_position_inbounds() {
         temp[1] = radius;
     }
     return temp;
+}
+vector<double> Circle_Class::element_wise_multiplication(vector<double> v1, vector<double> v2){
+    vector<double> temp;
+    for(int x=0; x!=v1.size(); ++x){
+        temp.push_back(v1[x]*v2[x]);
+    }
+    return temp;
+}
+double Circle_Class::sum(vector<double> v1){
+    double total = 0;
+    for(int x=0; x!=v1.size(); ++x){
+        total += v1[x];
+    }
+    return total;
+}
+double Circle_Class::dot(vector<double> v1, vector<double> v2){
+    return sum(element_wise_multiplication(v1, v2));
+}
+
+vector<double> Circle_Class::scalar_multiply(vector<double> v1, double scalar){
+    vector<double> temp;
+    for(int x=0; x!=v1.size(); ++x){
+        temp.push_back(v1[x]*scalar);
+    }
+    return temp;
+}
+vector<double> Circle_Class::add(vector<double> v1, vector<double> v2){
+    vector<double> temp;
+    for(int x=0; x!=v1.size(); ++x){
+        temp.push_back(v1[x]+v2[x]);
+    }
+    return temp;
+}
+vector<double> Circle_Class::subtract(vector<double> v1, vector<double> v2){
+    vector<double> temp;
+    for(int x=0; x!=v1.size(); ++x){
+        temp.push_back(v1[x]+v2[x]);
+    }
+    return temp;
+}
+double Circle_Class::pythagorian(vector<double> v1, vector<double> v2){
+    vector<double> temp = subtract(v1, v2);
+    temp = element_wise_multiplication(temp, temp);
+    double total = 0;
+    for(int x=0; x!=v1.size(); ++x){
+        total += temp[x];
+    }
+    return sqrt(total);
 }

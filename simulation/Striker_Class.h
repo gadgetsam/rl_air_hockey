@@ -9,7 +9,6 @@
 #include "Wall_Class.h"
 #include "passing_structures.h"
 #include "Circle_Class.h"
-#include "helpful_functions.cpp"
 class Striker_Class : public Circle_Class{
 private:
     int striker_ID;
@@ -19,6 +18,9 @@ public:
             vector<double> position_input, vector<double> max_position_input, int striker_ID_input) : Circle_Class(mass_input, radius_input,
                     update_time_input,position_input, max_position_input) {
         striker_ID=striker_ID_input;
+    }
+    Striker_Class() : Circle_Class(){
+        striker_ID = 0;
     }
 
     void propose_new_position(double update_time, vector<double> velocity_input){
