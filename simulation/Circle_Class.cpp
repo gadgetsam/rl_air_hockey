@@ -34,7 +34,7 @@ bool Circle_Class::circle_collision(Circle_Class* circle) {
     return false;
 
 }
-line_collision_return Circle_Class::line_collision(Line_Class *line) {
+Line_Collision_Return Circle_Class::line_collision(Line_Class *line) {
     vector<double> line_start = line->get_start();
     vector<double> line_end = line->get_end();
     double len = pythagorian(line_start, line_end);
@@ -43,7 +43,7 @@ line_collision_return Circle_Class::line_collision(Line_Class *line) {
     vector<double> closest_point = add(line_start, scalar_multiply(subtract(line_end,line_start), projection));
 
     double distance = pythagorian(closest_point, position_proposed);
-    //    line_collision_return temp;
+    //    Line_Collision_Return temp;
     if(distance >= radius){
         vector<double> test = {0,0};
 
@@ -55,22 +55,28 @@ line_collision_return Circle_Class::line_collision(Line_Class *line) {
 //    temp.closest_point = closest_point;
     return {true, closest_point};
 }
-
-vector<double> Circle_Class::check_position_inbounds() {
+//side should be -1 if it is used for puck;
+vector<double> Circle_Class::check_position_inbounds( int side) {
     vector<double> temp = position_proposed;
-    if(position_proposed[0] > max_position[0]-radius){
-        temp[0] = max_position[0]-radius;
-    }
-    if(position_proposed[0] < radius){
-        temp[0] = radius;
-    }
-    if(position_proposed[1] > max_position[1]-radius){
-        temp[1] = max_position[1]-radius;
-    }
-    if(position_proposed[1] < radius){
-        temp[1] = radius;
-    }
+
+        if(position_proposed[0] > max_position[0]-radius){
+            temp[0] = max_position[0]-radius;
+        }
+        if(position_proposed[0] < radius){
+            temp[0] = radius;
+        }
+        if(position_proposed[1] > max_position[1]*((side ==0) ? .5 : 1)-radius){
+            temp[1] = max_position[1]-radius;
+        }
+        if(position_proposed[1] < radius+max_position[1]*((side ==1) ? .5 : 0)){
+            temp[1] = radius+ max_position[1]* ((side ==1) ? .5 : 0);
+        }
+
     return temp;
+}
+void Circle_Class::reset(vector<double> start_position) {
+velocity = {0,0};
+position = start_position;
 }
 vector<double> Circle_Class::element_wise_multiplication(vector<double> v1, vector<double> v2){
     vector<double> temp;

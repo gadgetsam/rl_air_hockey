@@ -7,7 +7,7 @@
 
 #include "Line_Class.h"
 #include "passing_structures.h"
-struct line_collision_return{
+struct Line_Collision_Return{
     bool collision;
     vector<double> closest_point;
 };
@@ -31,9 +31,12 @@ public:
     Circle_Class(double mass_input, double radius_input, double update_time_input, vector<double> position_input,
             vector<double> max_position_input);
     Circle_Class();
-    line_collision_return line_collision(Line_Class* line);
+    //TODO add function to accept proposed position
+    Line_Collision_Return line_collision(Line_Class* line);
     bool circle_collision(Circle_Class* circle);
-    vector<double> check_position_inbounds();
+    vector<double> check_position_inbounds(int side); // Side should be 0 or 1 if used for striker and -1 if used for puck
+    void reset(vector<double> start_position );
+    //Helpful functions
     vector<double> element_wise_multiplication(vector<double> v1, vector<double> v2);
     double sum(vector<double> v1);
     double dot(vector<double> v1, vector<double> v2);

@@ -22,12 +22,13 @@ public:
     Striker_Class() : Circle_Class(){
         striker_ID = 0;
     }
-
     void propose_new_position(double update_time, vector<double> velocity_input){
         position_proposed.clear();
         position_proposed = add(scalar_multiply(velocity_input, update_time), position);
-        position_proposed = check_position_inbounds();
+        position_proposed = check_position_inbounds(striker_ID);
+
     }
+
 };
 
 

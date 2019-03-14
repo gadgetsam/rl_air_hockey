@@ -10,10 +10,10 @@ struct Position_And_Velocity{
     vector<double> velocity;
 };
 struct Update_Return{
-    int goal = 0;
-    Position_And_Velocity puck;
-    Position_And_Velocity striker_1;
-    Position_And_Velocity striker_2;
+    int goal;
+    vector<double> puck_position;
+    vector<double> striker_1_position;
+    vector<double> striker_2_position;
 };
 #endif //SIMULATION_PASSING_STRUCTURES_H
 
